@@ -1,56 +1,85 @@
 # PhysioClinic Appointment Queue System
 
-A command-line Java application for managing physiotherapy clinic patients, therapist schedules, appointments, and a priority-based appointment queue.
+**Student:** Sayan Manna  
+**Registration No.:** 25BAI10467  
+**Branch:** CSE (AI ML)  
+**Institution:** VIT Bhopal University  
+**Course:** Programming in Java
 
 ## 1. Project Overview
 
-PhysioClinic is an educational clinic scheduling system designed for the Programming in Java course. It demonstrates object-oriented programming, Java collections, file-based persistence, validation, exception handling, modular design, logging, and a `PriorityQueue` for emergency/urgent/routine appointment handling.
+PhysioClinic Appointment Queue System is a command-line Java application for handling basic clinic appointment work. It allows users to register patients, add therapists, manage therapist working hours, book appointments, handle priority-based queues, and maintain appointment status.
 
-The system is intentionally dependency-free: it uses only the Java Standard Library, so an evaluator can clone the repository and run it from a terminal without an IDE or GUI.
+The project is made for the Programming in Java course. It uses object-oriented programming, Java collections, file handling, validation, exception handling, logging, and a `PriorityQueue`.
 
-## 2. Problem Being Solved
+The project does not use any external Java library or database server. It can be compiled and run directly from a terminal with Java 17 or later.
 
-Small physiotherapy clinics may need a simple way to register patients, maintain therapist working hours, prevent double-booking, and serve urgent cases before routine appointments. The project models those tasks in a structured command-line application.
+## 2. Problem Statement
 
-## 3. Major Functional Modules
+A small physiotherapy clinic needs a simple system to keep patient records, manage therapist schedules, book appointments, avoid double-booking, and handle urgent appointments before routine appointments.
 
-1. **Patient Registration & Search**
-   - Register patient details.
-   - Persist patient records to local storage.
-   - Search patients by name.
-   - Mask phone numbers when displayed.
+This project provides these functions through a command-line interface. Patient and appointment information is stored locally so that the data is available when the application is started again.
 
-2. **Therapist Scheduling**
-   - Add therapists and their specializations.
-   - Store daily working hours.
-   - Reject appointment times outside working hours.
+## 3. Main Modules
 
-3. **Appointment Booking & Validation**
-   - Book appointments for a patient and therapist.
-   - Prevent therapist double-booking.
-   - Prevent the same patient from having a conflicting slot.
-   - Validate date/time and required fields.
+### 3.1 Patient Registration and Search
 
-4. **Priority Appointment Queue**
-   - Uses Java `PriorityQueue`.
-   - Priority order: `EMERGENCY` -> `URGENT` -> `ROUTINE`.
-   - Uses date/time as tie-breakers.
-   - Call the next appointment and move it to `IN_PROGRESS`.
+- Register new patients.
+- Store patient records in local files.
+- Search patients by name.
+- Mask phone numbers when patient information is displayed.
 
-5. **Appointment Lifecycle & Reports**
-   - Complete or cancel appointments.
-   - Produce daily appointment status summaries.
+### 3.2 Therapist Scheduling
 
-## 4. Technology Stack
+- Add therapists and their specializations.
+- Store therapist working hours.
+- Check whether an appointment falls within the therapist's working hours.
 
-- Java 17+
-- Java Standard Library only
-- `PriorityQueue`, `List`, `Optional`, `Stream`, `LocalDate`, `LocalTime`, `LocalDateTime`
-- Text-file persistence using UTF-8
-- `java.util.logging` for audit/application logs
-- Git/GitHub for version control
+### 3.3 Appointment Booking and Validation
 
-## 5. Repository Structure
+- Book an appointment for a patient with a therapist.
+- Prevent a therapist from being booked for two appointments at the same time.
+- Prevent a patient from having a conflicting appointment.
+- Validate required fields, dates, and times.
+
+### 3.4 Priority Appointment Queue
+
+The application uses Java's `PriorityQueue` to handle appointments according to priority.
+
+Priority order:
+
+```text
+EMERGENCY -> URGENT -> ROUTINE
+```
+
+If two appointments have the same priority, their appointment date and time are used to keep the queue order consistent.
+
+### 3.5 Appointment Status and Daily Report
+
+- Call the next appointment from the waiting queue.
+- Mark an appointment as `IN_PROGRESS`.
+- Complete an appointment.
+- Cancel an appointment.
+- Generate a daily appointment report.
+
+## 4. Technologies Used
+
+- Java 17 or later
+- Java Standard Library
+- `PriorityQueue`
+- `List`
+- `Optional`
+- `Stream`
+- `LocalDate`
+- `LocalTime`
+- `LocalDateTime`
+- File-based storage using UTF-8 text files
+- `java.util.logging`
+- Git and GitHub
+
+No external Java dependencies are required.
+
+## 5. Project Structure
 
 ```text
 PhysioClinicQueueSystem/
@@ -105,38 +134,47 @@ PhysioClinicQueueSystem/
 └── .gitignore
 ```
 
-## 6. Prerequisites
+## 6. Requirements
 
 Install a JDK that supports Java 17 or later.
 
-Check:
+Check the installed version with:
 
 ```bash
 java -version
 javac -version
 ```
 
-## 7. Run the Project from the Command Line
+## 7. Running the Application
 
 ### macOS / Linux
 
+Clone the repository and move into the project directory:
+
 ```bash
-git clone https://github.com/YOUR-USERNAME/physioclinic-appointment-queue.git
+git clone https://github.com/sayan25bai10467-dev/physioclinic-appointment-queue.git
 cd physioclinic-appointment-queue
+```
+
+Then run:
+
+```bash
 bash run.sh
 ```
 
 ### Windows CMD
 
 ```bat
-git clone https://github.com/YOUR-USERNAME/physioclinic-appointment-queue.git
+git clone https://github.com/sayan25bai10467-dev/physioclinic-appointment-queue.git
 cd physioclinic-appointment-queue
 run.bat
 ```
 
-### Direct Java commands
+### Run Without the Helper Script
 
-The project can also be compiled without the helper scripts:
+The project can also be compiled directly from the terminal.
+
+macOS / Linux:
 
 ```bash
 rm -rf out
@@ -145,14 +183,16 @@ javac --release 17 -d out @sources.txt
 java -cp out com.vit.physioclinic.Main
 ```
 
-On Windows, create an `out` directory and run:
+Windows:
 
 ```bat
+if exist out rmdir /s /q out
+mkdir out
 javac --release 17 -d out @sources.txt
 java -cp out com.vit.physioclinic.Main
 ```
 
-## 8. Run Tests
+## 8. Running the Tests
 
 ### macOS / Linux
 
@@ -166,7 +206,7 @@ bash test.sh
 test.bat
 ```
 
-### Direct test execution
+### Direct Test Command
 
 ```bash
 rm -rf out
@@ -175,6 +215,15 @@ javac --release 17 -d out @sources.txt
 java -cp out com.vit.physioclinic.tests.TestRunner
 ```
 
+The current test suite checks:
+
+- Patient registration
+- Appointment booking
+- Double-booking prevention
+- Priority queue ordering
+- Calling and completing an appointment
+- Working-hours validation
+
 Expected result:
 
 ```text
@@ -182,67 +231,92 @@ Passed: 6
 Failed: 0
 ```
 
-## 9. First-Time Usage
+## 9. How to Use the Program
 
-1. Start the application.
-2. Add at least one therapist using menu option `4`.
-3. Register at least one patient using menu option `1`.
-4. Use menu option `6` to book an appointment.
-5. Choose `1` for emergency, `2` for urgent, or `3` for routine priority.
-6. Use menu option `7` to inspect the current waiting queue.
-7. Use menu option `8` to call the next appointment.
-8. Use option `9` to complete an in-progress appointment.
-9. Use option `10` to cancel an appointment when required.
-10. Use option `11` to generate a daily report.
+After starting the application:
 
-## 10. Persistence
+1. Add a therapist using menu option `4`.
+2. Register a patient using menu option `1`.
+3. Use menu option `6` to book an appointment.
+4. Select the required priority: `1` for emergency, `2` for urgent, or `3` for routine.
+5. Use menu option `7` to view the waiting queue.
+6. Use menu option `8` to call the next appointment.
+7. Use option `9` to complete an appointment that is in progress.
+8. Use option `10` to cancel an appointment when required.
+9. Use option `11` to generate a daily report.
 
-Runtime data is stored in the `data/` directory:
+## 10. Data Storage
 
-- `patients.txt`
-- `therapists.txt`
-- `appointments.txt`
+The application stores runtime data in the `data/` directory.
 
-The application creates these files automatically on first use.
+The following files are created automatically when required:
 
-Application logs are written to:
+```text
+data/patients.txt
+data/therapists.txt
+data/appointments.txt
+```
+
+Application logs are stored in:
 
 ```text
 logs/clinic.log
 ```
 
-The repository `.gitignore` excludes generated runtime files from Git.
+Generated runtime files are excluded from Git using the project's `.gitignore` file.
 
-## 11. Data Privacy Approach
+## 11. Privacy Measures in the Project
 
-The project is an educational prototype, not a production healthcare information system. The console masks phone numbers and uses patient initials inside queue-related displays. Logs avoid storing full patient contact information. Local text files are not encrypted; production healthcare deployment would require stronger access control, encryption, auditing, and legal/privacy compliance.
+This is an academic project and is not intended for production healthcare use.
 
-## 12. Design Highlights
+The application takes a few basic privacy measures:
 
-- OOP model classes for patient, therapist, and appointment entities.
-- Repository classes separate persistence from business logic.
-- `ClinicService` contains validation and business rules.
-- `ConsoleUI` handles user interaction.
-- `PriorityQueue<Appointment>` implements appointment prioritization.
-- `Comparable<Appointment>` defines deterministic queue ordering.
-- Custom test runner keeps the project dependency-free.
-- File-based storage makes the application restart-safe without requiring a database server.
+- Phone numbers are masked when displayed in the console.
+- Patient initials are used in queue-related displays.
+- Logs avoid storing full patient contact information.
 
-## 13. VITyarthi Deliverables Included
+The local text files are not encrypted. A production healthcare system would need stronger access control, encryption, auditing, and appropriate privacy and legal safeguards.
 
-This repository contains the source code plus the supporting documentation needed for the course project:
+## 12. Java Concepts Used
+
+The project applies the following Java concepts:
+
+- Classes and objects
+- Encapsulation
+- Enums
+- Interfaces and comparable ordering
+- Collections
+- `PriorityQueue`
+- Lists and streams
+- File input/output
+- Date and time API
+- Exception handling
+- Input validation
+- Logging
+- Modular package structure
+
+The main application is divided into model, repository, service, UI, utility, and test packages so that different responsibilities are kept separate.
+
+## 13. Documentation Included
+
+The repository also contains the project documentation required for the course:
 
 - `README.md`
 - `statement.md`
-- Functional/non-functional requirements
-- System architecture documentation
+- Functional and non-functional requirements
+- Architecture documentation
 - Workflow and UML diagrams
 - Design decisions
 - Testing documentation
 - User guide
-- Command-line run scripts
-- Source code with 5-10+ meaningful Java modules/classes
+- Command-line run and test scripts
+- Project report PDF
 
-## 14. Academic Integrity
+## 14. Student Declaration
 
-This project should be reviewed and customized by the submitting student. Add your own student details, screenshots, testing evidence, Git history, and any course-specific changes before submission. The VITyarthi instructions require original work.
+This repository is submitted as part of the Programming in Java course project in VITyarthi.
+
+**Sayan Manna**  
+**25BAI10467**  
+**CSE (AI ML)**  
+**VIT Bhopal University**
