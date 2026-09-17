@@ -1,0 +1,22 @@
+digraph Sequence {
+  rankdir=LR;
+  node [shape=box, fontname="Arial"];
+  Staff [label="Clinic Staff"];
+  UI [label="ConsoleUI"];
+  Service [label="ClinicService"];
+  Repo [label="AppointmentRepository"];
+  Store [label="appointments.txt"];
+  Queue [label="PriorityQueue"];
+  Staff -> UI [label="Book appointment"];
+  UI -> Service [label="bookAppointment"];
+  Service -> Repo [label="findAll / conflict check"];
+  Repo -> Store [label="read"];
+  Service -> Repo [label="save"];
+  Repo -> Store [label="write"];
+  Staff -> UI [label="Call next"];
+  UI -> Service [label="callNextAppointment"];
+  Service -> Queue [label="build waiting queue"];
+  Queue -> Service [label="poll highest priority"];
+  Service -> Repo [label="persist IN_PROGRESS"];
+  Repo -> Store [label="write"];
+}

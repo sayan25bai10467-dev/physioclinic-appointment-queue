@@ -1,0 +1,16 @@
+digraph ClassDiagram {
+  rankdir=LR;
+  node [shape=record, fontname="Arial"];
+  Patient [label="{Patient|id\nfullName\nage\nphone\nmedicalConcern}"];
+  Therapist [label="{Therapist|id\nname\nspecialization\nworkingStart\nworkingEnd}"];
+  Appointment [label="{Appointment|id\npatientId\ntherapistId\ndate\ntime\npriority\nstatus\nnotes}"];
+  ClinicService [label="{ClinicService|registerPatient()\naddTherapist()\nbookAppointment()\ngetQueue()\ncallNextAppointment()\ncompleteAppointment()}"];
+  PatientRepo [label="{PatientRepository|save()\nfindById()\nfindByName()}"];
+  TherapistRepo [label="{TherapistRepository|save()\nfindById()\nfindAll()}"];
+  AppointmentRepo [label="{AppointmentRepository|save()\nfindById()\nfindAll()\npersistChanges()}"];
+  ClinicService -> PatientRepo;
+  ClinicService -> TherapistRepo;
+  ClinicService -> AppointmentRepo;
+  Appointment -> Patient [label="patientId"];
+  Appointment -> Therapist [label="therapistId"];
+}

@@ -1,0 +1,22 @@
+PhysioClinic demonstration result
+
+Automated tests:
+[PASS] Patient registration
+[PASS] Successful appointment booking
+[PASS] Double-booking prevention
+[PASS] Priority queue ordering
+[PASS] Call next and complete
+[PASS] Working-hours validation
+Passed: 6
+Failed: 0
+
+Priority queue demonstration:
+1 -> A0002 -> EMERGENCY
+2 -> A0001 -> ROUTINE
+
+Daily report for 2026-09-18:
+Total: 2
+Waiting: 1
+In Progress: 0
+Completed: 1
+Cancelled: 0

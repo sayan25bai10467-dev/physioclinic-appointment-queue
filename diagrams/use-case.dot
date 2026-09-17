@@ -1,0 +1,13 @@
+digraph UseCase {
+  rankdir=LR;
+  node [shape=ellipse, fontname="Arial"];
+  Staff [shape=box, label="Clinic Staff"];
+  Register [label="Register Patient"];
+  Therapist [label="Manage Therapist"];
+  Book [label="Book Appointment"];
+  Queue [label="View Priority Queue"];
+  Call [label="Call Next Appointment"];
+  Complete [label="Complete / Cancel Appointment"];
+  Report [label="Generate Daily Report"];
+  Staff -> {Register Therapist Book Queue Call Complete Report};
+}

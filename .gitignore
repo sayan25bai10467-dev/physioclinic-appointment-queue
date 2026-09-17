@@ -1,0 +1,19 @@
+# Compiled Java output
+out/
+*.class
+
+# Runtime data generated locally
+logs/clinic.log
+data/patients.txt
+data/therapists.txt
+data/appointments.txt
+
+# IDE/editor files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# OS/editor temp files
+*.swp
+*~

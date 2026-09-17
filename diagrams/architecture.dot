@@ -1,0 +1,15 @@
+digraph Architecture {
+  rankdir=TB;
+  node [shape=box, style="rounded", fontname="Arial"];
+  UI [label="ConsoleUI"];
+  Service [label="ClinicService\nBusiness Rules + Priority Queue"];
+  Models [label="Model Layer\nPatient / Therapist / Appointment"];
+  Repos [label="Repository Layer\nPatient / Therapist / Appointment"];
+  Utils [label="Utilities\nValidation / IDs / Privacy / Logging"];
+  Storage [label="data/*.txt\nText-file Storage"];
+  UI -> Service;
+  Service -> Models;
+  Service -> Repos;
+  Service -> Utils;
+  Repos -> Storage;
+}
