@@ -4,7 +4,7 @@
 **Registration No.:** 25BAI10467  
 **Branch:** CSE (AI ML)  
 **Institution:** VIT Bhopal University  
-**Course:** Programming in Java (course code - 2006)
+**Course:** Programming in Java (course code - CSE2006)
 
 ## 1. Project Overview
 
